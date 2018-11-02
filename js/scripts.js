@@ -43,12 +43,10 @@ Person.prototype.turnScore = function() {
   }
   this.score = [];
   return this.total
-  console.log(this.total)
 }
 
 Person.prototype.totalScore = function() {
   this.finalTotal.push(this.total);
-  console.log(this.total)
   this.total = 0;
   return this.finalTotal;
 }
@@ -73,8 +71,16 @@ pigDice.addPlayer(player2)
 function rollingDice() {
   $("#rollPlayerOne").click(function(){
     var seeScore = player1.onRoll();
-    $("#playerOneScore").text(seeScore);
-    // console.log("look", seeScore)
+    if (seeScore === 1) {
+      var testOne = player1.turnScore();
+      var stringOne = testOne.toString();
+      var countOne = player1.totalScore();
+      var allOne = player1.finalScore();
+      $("#playerOneTurnTotal").text(stringOne);
+      $("#playerOneTotalScore").text(allOne);
+    } else {
+      $("#playerOneScore").text(seeScore);
+    }
   });
 
   $("#holdPlayerOne").click(function(){
@@ -91,7 +97,17 @@ function rollingDice() {
 
   $("#rollPlayerTwo").click(function(){
     var seeScore = player2.onRoll();
-    $("#playerTwoScore").text(seeScore);
+    if (seeScore === 1) {
+      var test = player2.turnScore();
+      var string = test.toString()
+      var count = player2.totalScore();
+      var allTwo = player2.finalScore();
+      $("#playerTwoTurnTotal").text(string);
+      $("#playerTwoTotalScore").text(allTwo);
+    } else {
+      $("#playerTwoScore").text(seeScore);
+    }
+    // debugger;
   });
 
   $("#holdPlayerTwo").click(function(){
@@ -106,8 +122,6 @@ function rollingDice() {
     }
   });
 };
-
-
 
 $(document).ready(function() {
   rollingDice();
